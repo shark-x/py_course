@@ -22,7 +22,7 @@ class TestAddGroupe(unittest.TestCase):
         wd.find_element_by_name("new").click()
         wd.find_element_by_name("group_name").click()
         wd.find_element_by_name("group_name").clear()
-        wd.find_element_by_name("group_name").send_keys("fistrgroupe")
+        wd.find_element_by_name("group_name").send_keys("namegroup")
         wd.find_element_by_name("group_header").click()
         wd.find_element_by_name("group_header").clear()
         wd.find_element_by_name("group_header").send_keys("11111")
