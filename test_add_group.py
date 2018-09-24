@@ -89,11 +89,13 @@ class TestAddContacts(unittest.TestCase):
     def test_add_contacts(self):
         wd = self.wd
         self.open_home_page(wd)
-        self.login(wd, 'aa', 'aaa')
-        self.contact_creation(wd, "aaaaaa", "aaaaaaa", "aaaaaaaaa", "bbbbbbbbbbbb", "wert", "qwert",
-                              "qwertyuiop[]asdfghjkl;zxcvbnm,./", "dfghjkl;", "1234567890", "dfghjkl", "567gfh",
-                              "123@jdjj.com", "sssssssssss", "eeeeeeeeee", "eeeeeeeeeeeeee", "1ggg@gh.com",
-                              "hhhh@hh.hh", "17", "November", "1998", "12", "November", "2222")
+        self.login(wd, username='admin', password='secret')
+        self.contact_creation(wd, firstname="aaaaaa", middlename="aaaaaaa", lastname="aaaaaaaaa", nickname="bbbbbbbbbbbb",
+                              title="wert", company="qwert", address="qwertyuiop[]asdfghjkl;zxcvbnm,./",
+                              thome="dfghjkl;", tmobile="1234567890", twork="dfghjkl", tfax="567gfh",
+                              email="123@jdjj.com", secaddress="sssssssssss", sechome="eeeeeeeeee", secnote="eeeeeeeeeeeeee",
+                              email2="1ggg@gh.com", email3="hhhh@hh.hh", bday="17", bmonth="November", byear="1998",
+                              aday="12", amonth="November", ayear="2222")
         # Submit contact creation
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
         # Logout
