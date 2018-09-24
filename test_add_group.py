@@ -7,12 +7,12 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 import unittest, time, re
 
+
 class TestAddGroupe(unittest.TestCase):
     def setUp(self):
         self.wd = webdriver.Firefox()
         self.wd.implicitly_wait(30)
 
-    
     def test_add_groupe(self):
         wd = self.wd
         wd.get("http://localhost/addressbook/")
@@ -46,9 +46,9 @@ class TestAddGroupe(unittest.TestCase):
         except NoAlertPresentException as e: return False
         return True
     
-
     def tearDown(self):
         self.wd.quit()
+
 
 if __name__ == "__main__":
     unittest.main()
