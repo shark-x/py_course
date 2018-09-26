@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from selenium import webdriver
-from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 import unittest
@@ -18,7 +17,7 @@ class UntitledTestCase(unittest.TestCase):
         wd.get("http://localhost/addressbook/")
         self.login(wd, username="admin", password="secret")
         self.create_contact(wd, Contact(firstname="anasa", middlename="middlename", lastname="lastname", nickname="nickname",
-                            title="title", company="company", address="address",
+                            photo="C:\\Users\\Public\\Pictures\\shark.png", title="title", company="company", address="address",
                             thome="telhome", tmobile="telmobile", twork="telwork", fax="fax",
                             email="email", email2="email2", email3="email3",
                             homepage="homepage",
@@ -42,7 +41,7 @@ class UntitledTestCase(unittest.TestCase):
         # Different information
         #wd.find_element_by_name("photo").click()
         #wd.find_element_by_name("photo").clear()
-        #wd.find_element_by_name("photo").send_keys(photo)
+        wd.find_element_by_name("photo").send_keys(contact.photo)
         wd.find_element_by_name("title").click()
         wd.find_element_by_name("title").clear()
         wd.find_element_by_name("title").send_keys(contact.title)
