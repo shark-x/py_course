@@ -13,8 +13,6 @@ class UntitledTestCase(unittest.TestCase):
 
     def test_untitled_test_case(self):
         wd = self.wd
-        # Open home page
-        wd.get("http://localhost/addressbook/")
         self.login(wd, username="admin", password="secret")
         self.create_contact(wd, Contact(firstname="anasa", middlename="middlename", lastname="lastname", nickname="nickname",
                             photo="C:\\Users\\Public\\Pictures\\shark.png", title="title", company="company", address="address",
@@ -92,12 +90,14 @@ class UntitledTestCase(unittest.TestCase):
         # Submit contact creation
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
 
-    def login(self, driver, username, password):
-        driver.find_element_by_name("user").clear()
-        driver.find_element_by_name("user").send_keys(username)
-        driver.find_element_by_name("pass").clear()
-        driver.find_element_by_name("pass").send_keys(password)
-        driver.find_element_by_xpath("//input[@value='Login']").click()
+    def login(self, wd, username, password):
+        # Open home page
+        wd.get("http://localhost/addressbook/")
+        wd.find_element_by_name("user").clear()
+        wd.find_element_by_name("user").send_keys(username)
+        wd.find_element_by_name("pass").clear()
+        wd.find_element_by_name("pass").send_keys(password)
+        wd.find_element_by_xpath("//input[@value='Login']").click()
 
     def is_element_present(self, how, what):
         try:
