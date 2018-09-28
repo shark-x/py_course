@@ -48,7 +48,7 @@ class GroupHelper:
         wd.find_element_by_name("group_header").send_keys(group.header)
         wd.find_element_by_name("group_footer").clear()
         wd.find_element_by_name("group_footer").send_keys(group.footer)
-        wd.find_element_by_name("Update").click()
+        wd.find_element_by_name("update").click()
         self.return_to_group_page()
 
 
