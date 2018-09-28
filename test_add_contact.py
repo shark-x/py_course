@@ -39,8 +39,6 @@ class UntitledTestCase(unittest.TestCase):
         wd.find_element_by_name("nickname").clear()
         wd.find_element_by_name("nickname").send_keys(contact.nickname)
         # Different information
-        #wd.find_element_by_name("photo").click()
-        #wd.find_element_by_name("photo").clear()
         wd.find_element_by_name("photo").send_keys(contact.photo)
         wd.find_element_by_name("title").click()
         wd.find_element_by_name("title").clear()
@@ -95,7 +93,6 @@ class UntitledTestCase(unittest.TestCase):
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
 
     def login(self, driver, username, password):
-        # Login
         driver.find_element_by_name("user").clear()
         driver.find_element_by_name("user").send_keys(username)
         driver.find_element_by_name("pass").clear()
