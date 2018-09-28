@@ -22,7 +22,16 @@ class UntitledTestCase(unittest.TestCase):
                             bday="15", bmonth="November", byear="1990",aday="18", amonth="September", ayear="2016",
                             secaddress="secaddress", sechome="sechome", secnote="secnote"))
         # Logout
-        wd.find_element_by_link_text("Logout").click()
+        self.logout(wd)
+
+    def login(self, wd, username, password):
+        # Open home page
+        wd.get("http://localhost/addressbook/")
+        wd.find_element_by_name("user").clear()
+        wd.find_element_by_name("user").send_keys(username)
+        wd.find_element_by_name("pass").clear()
+        wd.find_element_by_name("pass").send_keys(password)
+        wd.find_element_by_xpath("//input[@value='Login']").click()
 
     def create_contact(self, wd, contact):
         wd.find_element_by_link_text("add new").click()
@@ -90,14 +99,8 @@ class UntitledTestCase(unittest.TestCase):
         # Submit contact creation
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
 
-    def login(self, wd, username, password):
-        # Open home page
-        wd.get("http://localhost/addressbook/")
-        wd.find_element_by_name("user").clear()
-        wd.find_element_by_name("user").send_keys(username)
-        wd.find_element_by_name("pass").clear()
-        wd.find_element_by_name("pass").send_keys(password)
-        wd.find_element_by_xpath("//input[@value='Login']").click()
+    def logout(self, wd):
+        wd.find_element_by_link_text("Logout").click()
 
     def is_element_present(self, how, what):
         try:
