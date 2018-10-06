@@ -2,10 +2,10 @@
 from model.contact import Contact
 
 
-def test_untitled_test_case(app):
+def test_add_contact(app):
     app.session.login(username="admin", password="secret")
     app.contact.create_contact(Contact(firstname="anasa", middlename="middlename", lastname="lastname", nickname="nickname",
-                            photo="C:\\Users\\Public\\Pictures\\shark.png", title="title", company="company", address="address",
+                            photo="C:\\Users\\Public\\Pictures\\ананас.jpg", title="title", company="company", address="address",
                             thome="telhome", tmobile="telmobile", twork="telwork", fax="fax",
                             email="email", email2="email2", email3="email3",
                             homepage="homepage",
