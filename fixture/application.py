@@ -26,4 +26,3 @@ class Application:
             return True
         except:
             return False
-
