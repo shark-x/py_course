@@ -42,7 +42,7 @@ class GroupHelper:
     def fill_form_group(self, group):
         self.change_field_value("group_name", group.name)
         self.change_field_value("group_header", group.header)
-        self.change_field_value("group_header", group.footer)
+        self.change_field_value("group_footer", group.footer)
 
     def change_field_value(self, field, text):
         wd = self.app.wd
@@ -58,7 +58,3 @@ class GroupHelper:
         wd = self.app.wd
         self.open_group_page()
         return len(wd.find_elements_by_name("selected[]"))
-
-
-
-
