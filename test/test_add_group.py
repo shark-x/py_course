@@ -8,3 +8,7 @@ def test_add_group(app):
 
 def test_add_empty_group(app):
     app.group.create(Group(name="", header="", footer=""))
+
+
+def test_add_group_header(app):
+    app.group.create(Group(header="only header"))
