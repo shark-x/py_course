@@ -10,12 +10,17 @@ class ContactHelper:
         self.fill_form_contact(contact)
         # Submit contact creation
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
-        wd.find_element_by_link_text("home page").click()
+        self.return_home_page()
+
+    def return_home_page(self):
+        wd = self.app.wd
+        if not (wd.current_url.endswith("/") and len(wd.find_elements_by_css_selector("img[alt=\"Edit\"]")) > 0):
+            wd.find_element_by_link_text("home").click()
 
     def details_contact(self):
         wd = self.app.wd
         wd.find_element_by_css_selector("img[alt=\"Details\"]").click()
-        wd.find_element_by_link_text("home").click()
+        self.return_home_page()
 
     def edit(self, new_contact_data):
         wd = self.app.wd
@@ -23,14 +28,14 @@ class ContactHelper:
         self.fill_form_contact(new_contact_data)
         # Submit contact creation
         wd.find_element_by_name("update").click()
-        wd.find_element_by_link_text("home page").click()
+        self.return_home_page()
 
     def delete(self):
         wd = self.app.wd
         wd.find_element_by_name("selected[]").click()
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to_alert().accept()
-        wd.find_element_by_link_text("home").click()
+        self.return_home_page()
 
     def fill_form_contact(self, contact):
         # Name
