@@ -15,6 +15,7 @@ def quadratic_eq(a,b,c):
     else:
         print("Ошибка ввода/Исключение")
 
+
 quadratic_eq(1,1,1)
 quadratic_eq(1,2,1)
 quadratic_eq(1,5,6)
