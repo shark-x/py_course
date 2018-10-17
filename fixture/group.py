@@ -19,6 +19,7 @@ class GroupHelper:
         wd.find_element_by_name("submit").click()
         self.return_to_group_page()
         wd.find_element_by_link_text("home").click()
+        self.group_cache = None
 
     def delete_first_group(self):
         wd = self.app.wd
@@ -28,6 +29,7 @@ class GroupHelper:
         wd.find_element_by_name("delete").click()
         self.return_to_group_page()
         wd.find_element_by_link_text("home").click()
+        self.group_cache = None
 
     def selected_first_group(self):
         wd = self.app.wd
@@ -41,6 +43,7 @@ class GroupHelper:
         self.fill_form_group(new_group_data)
         wd.find_element_by_name("update").click()
         self.return_to_group_page()
+        self.group_cache = None
 
     def fill_form_group(self, group):
         self.change_field_value("group_name", group.name)
@@ -57,17 +60,21 @@ class GroupHelper:
         wd = self.app.wd
         wd.find_element_by_link_text("group page").click()
 
+    # Возвращает длину списка групп
     def count(self):
         wd = self.app.wd
         self.open_group_page()
         return len(wd.find_elements_by_name("selected[]"))
 
+    group_cache = None
+
     def get_group_list(self):
-        wd = self.app.wd
-        self.open_group_page()
-        lgroups = []
-        for element in wd.find_elements_by_xpath("//span[@class='group']"):
-            text = element.text
-            id = element.find_element_by_name("selected[]").get_attribute("value")
-            lgroups.append(Group(name=text, id=id))
-        return lgroups
+        if self.group_cache is None:
+            wd = self.app.wd
+            self.open_group_page()
+            self.group_cache = []
+            for element in wd.find_elements_by_xpath("//span[@class='group']"):
+                text = element.text
+                id = element.find_element_by_name("selected[]").get_attribute("value")
+                self.group_cache.append(Group(name=text, id=id))
+        return list(self.group_cache)
