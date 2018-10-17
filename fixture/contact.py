@@ -37,14 +37,21 @@ class ContactHelper:
         self.open_home_page()
         self.contact_cache = None
 
-    def delete(self):
+    def delete_contact_by_index(self, index):
         wd = self.app.wd
         self.open_home_page()
-        wd.find_element_by_name("selected[]").click()
+        self.selected_contact_by_index(index)
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to_alert().accept()
         self.open_home_page()
         self.contact_cache = None
+
+    def delete_first_contact(self):
+        self.delete_contact_by_index(0)
+
+    def selected_contact_by_index(self, index):
+        wd = self.app.wd
+        wd.find_elements_by_name("selected[]")[index].click()
 
     def fill_form_contact(self, contact):
         # Name
