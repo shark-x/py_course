@@ -21,26 +21,26 @@ class ContactHelper:
         if not (wd.current_url.endswith("/") and len(wd.find_elements_by_css_selector("img[alt=\"Edit\"]")) > 0):
             wd.find_element_by_link_text("home").click()
 
-    def details_contact(self):
+    def edit_contact_by_index(self, new_contact_data, index):
         wd = self.app.wd
         self.open_home_page()
-        wd.find_element_by_css_selector("img[alt=\"Details\"]").click()
-        self.open_home_page()
-
-    def edit(self, new_contact_data):
-        wd = self.app.wd
-        self.open_home_page()
-        wd.find_element_by_css_selector("img[alt=\"Edit\"]").click()
+        element = self.selected_contact_by_index(index)
+        element.find_element_by_xpath("td[8]").click()
         self.fill_form_contact(new_contact_data)
         # Submit contact creation
         wd.find_element_by_name("update").click()
         self.open_home_page()
         self.contact_cache = None
 
+    def selected_contact_by_index(self, index):
+        wd = self.app.wd
+        return wd.find_elements_by_xpath("//tr[@name='entry']")[index]
+
     def delete_contact_by_index(self, index):
         wd = self.app.wd
         self.open_home_page()
-        self.selected_contact_by_index(index)
+        element = self.selected_contact_by_index(index)
+        element.find_element_by_xpath("td[1]").click()
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to_alert().accept()
         self.open_home_page()
@@ -49,9 +49,10 @@ class ContactHelper:
     def delete_first_contact(self):
         self.delete_contact_by_index(0)
 
-    def selected_contact_by_index(self, index):
-        wd = self.app.wd
-        wd.find_elements_by_name("selected[]")[index].click()
+    # def selected_contact_by_index(self, index):
+    #     wd = self.app.wd
+    #     # return wd.find_elements_by_name("selected[]")[index]
+    #     return wd.find_elements_by_name("selected[]")
 
     def fill_form_contact(self, contact):
         # Name
