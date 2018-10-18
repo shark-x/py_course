@@ -49,11 +49,6 @@ class ContactHelper:
     def delete_first_contact(self):
         self.delete_contact_by_index(0)
 
-    # def selected_contact_by_index(self, index):
-    #     wd = self.app.wd
-    #     # return wd.find_elements_by_name("selected[]")[index]
-    #     return wd.find_elements_by_name("selected[]")
-
     def fill_form_contact(self, contact):
         # Name
         self.change_field_contact("firstname", contact.firstname)
@@ -118,12 +113,3 @@ class ContactHelper:
                 id = element.find_element_by_name("selected[]").get_attribute("id")
                 self.contact_cache.append(Contact(lastname=lastname, firstname=firstname, id=id))
         return list(self.contact_cache)
-
-
-
-
-
-
-
-
-
