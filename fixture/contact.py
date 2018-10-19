@@ -112,9 +112,9 @@ class ContactHelper:
                 lastname = element.find_element_by_xpath("td[2]").text
                 firstname = element.find_element_by_xpath("td[3]").text
                 id = element.find_element_by_name("selected[]").get_attribute("id")
-                all_phones = element.find_element_by_xpath("td[6]").text.splitlines()
-                self.contact_cache.append(Contact(lastname=lastname, firstname=firstname, id=id, thome=all_phones[0],
-                                                  tmobile=all_phones[1], twork=all_phones[2], sechome=all_phones[3]))
+                all_phones = element.find_element_by_xpath("td[6]").text
+                self.contact_cache.append(Contact(lastname=lastname, firstname=firstname, id=id,
+                                                  all_phones_from_home_page=all_phones))
         return list(self.contact_cache)
 
     def open_contact_to_edit_by_index(self, index):
@@ -150,7 +150,7 @@ class ContactHelper:
         thome = re.search("H: (.*)", text).group(1)
         twork = re.search("W: (.*)", text).group(1)
         tmobile = re.search("M: (.*)", text).group(1)
-        sechome = re.search("M: (.*)", text).group(1)
+        sechome = re.search("F: (.*)", text).group(1)
         return Contact(thome=thome, twork=twork, tmobile=tmobile, sechome=sechome)
 
 
