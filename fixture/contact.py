@@ -111,10 +111,13 @@ class ContactHelper:
             for element in wd.find_elements_by_xpath("//tr[@name='entry']"):
                 lastname = element.find_element_by_xpath("td[2]").text
                 firstname = element.find_element_by_xpath("td[3]").text
+                address = element.find_element_by_xpath("td[4]").text
                 id = element.find_element_by_name("selected[]").get_attribute("id")
+                all_emails = element.find_element_by_xpath("td[5]").text
                 all_phones = element.find_element_by_xpath("td[6]").text
-                self.contact_cache.append(Contact(lastname=lastname, firstname=firstname, id=id,
-                                                  all_phones_from_home_page=all_phones))
+                self.contact_cache.append(Contact
+                                          (lastname=lastname, firstname=firstname, address=address, id=id,
+                                           all_emails_from_home_page=all_emails, all_phones_from_home_page=all_phones))
         return list(self.contact_cache)
 
     def open_contact_to_edit_by_index(self, index):
@@ -137,11 +140,16 @@ class ContactHelper:
         lastname = wd.find_element_by_name("lastname").get_attribute("value")
         firstname = wd.find_element_by_name("firstname").get_attribute("value")
         id = wd.find_element_by_name("home").get_attribute("value")
+        email = wd.find_element_by_name("email").get_attribute("value")
+        email2 = wd.find_element_by_name("email2").get_attribute("value")
+        email3 = wd.find_element_by_name("email3").get_attribute("value")
         thome = wd.find_element_by_name("home").get_attribute("value")
         twork = wd.find_element_by_name("work").get_attribute("value")
         tmobile = wd.find_element_by_name("mobile").get_attribute("value")
         sechome = wd.find_element_by_name("phone2").get_attribute("value")
-        return Contact(lastname=lastname, firstname=firstname, id=id, thome=thome, twork=twork, tmobile=tmobile, sechome=sechome)
+        return Contact(lastname=lastname, firstname=firstname, id=id,
+                       email=email, email2=email2, email3=email3,
+                       thome=thome, twork=twork, tmobile=tmobile, sechome=sechome)
 
     def get_contact_from_view_page(self, index):
         wd = self.app.wd
