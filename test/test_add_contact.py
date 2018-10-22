@@ -9,7 +9,7 @@ def random_string(prefix, maxlen):
     symbols = string.ascii_letters + string.digits + " "*10
     return prefix + "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
 
-
+# data_driven
 test_data = [
         Contact(firstname="", middlename="", lastname="")]+[
         Contact(firstname=random_string("name", 10), middlename=random_string("header", 20), lastname=random_string("footer", 15))
