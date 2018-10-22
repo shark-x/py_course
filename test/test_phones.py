@@ -14,6 +14,7 @@ def test_phones_on_contact_view_page(app):
     assert contact_from_view_page.thome == contact_from_edit_page.thome
     assert contact_from_view_page.twork == contact_from_edit_page.twork
     assert contact_from_view_page.tmobile == contact_from_edit_page.tmobile
+    assert contact_from_view_page.sechome == contact_from_edit_page.sechome
 
 
 def clear(s):

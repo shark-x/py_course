@@ -147,9 +147,10 @@ class ContactHelper:
         twork = wd.find_element_by_name("work").get_attribute("value")
         tmobile = wd.find_element_by_name("mobile").get_attribute("value")
         sechome = wd.find_element_by_name("phone2").get_attribute("value")
+        address = wd.find_element_by_name("address").get_attribute("value")
         return Contact(lastname=lastname, firstname=firstname, id=id,
                        email=email, email2=email2, email3=email3,
-                       thome=thome, twork=twork, tmobile=tmobile, sechome=sechome)
+                       thome=thome, twork=twork, tmobile=tmobile, sechome=sechome, address=address)
 
     def get_contact_from_view_page(self, index):
         wd = self.app.wd
@@ -158,7 +159,7 @@ class ContactHelper:
         thome = re.search("H: (.*)", text).group(1)
         twork = re.search("W: (.*)", text).group(1)
         tmobile = re.search("M: (.*)", text).group(1)
-        sechome = re.search("F: (.*)", text).group(1)
+        sechome = re.search("P: (.*)", text).group(1)
         return Contact(thome=thome, twork=twork, tmobile=tmobile, sechome=sechome)
 
 
