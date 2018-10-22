@@ -1,8 +1,11 @@
 import re
 from random import randrange
+from model.contact import Contact
 
 
 def test_contact_info_on_home_page(app):
+    if app.contact.count() == 0:
+        app.contact.create(Contact(firstname="FIRSTNAME", tmobile="123456789"))
     contact_list_on_hp = app.contact.get_contact_list()
     index = randrange(len(contact_list_on_hp))
     contact_info_on_hp = contact_list_on_hp[index]
