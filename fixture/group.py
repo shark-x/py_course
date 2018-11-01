@@ -31,12 +31,26 @@ class GroupHelper:
         wd.find_element_by_link_text("home").click()
         self.group_cache = None
 
+    def delete_group_by_id(self, id):
+        wd = self.app.wd
+        self.open_group_page()
+        self.selected_group_by_id(id)
+        # submit deletion
+        wd.find_element_by_name("delete").click()
+        self.return_to_group_page()
+        wd.find_element_by_link_text("home").click()
+        self.group_cache = None
+
     # def delete_first_group(self):
     #     self.delete_group_by_index(0)
 
     def selected_group_by_index(self, index):
         wd = self.app.wd
         wd.find_elements_by_name("selected[]")[index].click()
+
+    def selected_group_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element_by_xpath("//input[@value='%s']" % id).click()
 
     def edit_group_by_index(self, new_group_data, index):
         wd = self.app.wd
