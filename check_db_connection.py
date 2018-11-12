@@ -22,7 +22,7 @@
 #         print(row)
 # finally:
 #     connection.close()
-#
+
 # from fixture.db import DbFixture
 #
 # db = DbFixture(host="127.0.0.1", name="addressbook", user="root", password="")
@@ -35,15 +35,15 @@
 # finally:
 #     db.destroy()
 
-from fixture.orm import ORMFixture
-from model.group import Group
-
-db = ORMFixture(host="127.0.0.1", name="addressbook", user="root", password="")
-
-try:
-    li = db.get_contacts_in_group(Group(id="317"))
-    for item in li:
-        print(item)
-    print(len(li))
-finally:
-    pass #db.destroy()
+# from fixture.orm import ORMFixture
+# from model.group import Group
+#
+# db = ORMFixture(host="127.0.0.1", name="addressbook", user="root", password="")
+#
+# try:
+#     li = db.get_contacts_in_group(Group(id="317"))
+#     for item in li:
+#         print(item)
+#     print(len(li))
+# finally:
+#     pass #db.destroy()

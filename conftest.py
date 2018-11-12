@@ -32,21 +32,6 @@ def app(request):
     return fixture
 
 
-@pytest.fixture(scope="session", autouse=True)
-def stop(request):
-    def fin():
-        fixture.session.ensure_logout()
-        fixture.destroy()
-    request.addfinalizer(fin)
-    return fixture
-
-
-def pytest_addoption(parser):
-    parser.addoption("--browser", action="store", default="chrome")
-    parser.addoption("--target", action="store", default="target.json")
-    parser.addoption("--check_ui", action="store_true")
-
-
 def pytest_generate_tests(metafunc):
     for fixture in metafunc.fixturenames:
         if fixture.startswith("data_"):
@@ -77,6 +62,24 @@ def db(request):
     request.addfinalizer(fin)
     return dbfixture
 
+
+@pytest.fixture(scope="session", autouse=True)
+def stop(request):
+    def fin():
+        fixture.session.ensure_logout()
+        fixture.destroy()
+    request.addfinalizer(fin)
+    return fixture
+
+
+def pytest_addoption(parser):
+    parser.addoption("--browser", action="store", default="chrome")
+    parser.addoption("--target", action="store", default="target.json")
+    parser.addoption("--check_ui", action="store_true")
+
+
 @pytest.fixture
 def check_ui(request):
     return request.config.getoption("--check_ui")
+
+
