@@ -22,12 +22,12 @@ def test_del_some_contact_in_group(app, db, check_ui):
             contacts_not_in_group = db.get_contacts_not_in_group(Group(id=group.id))
             contact = random.choice(contacts_not_in_group)
             # добавляем выбранный контакт в выбранную группу
-            app.contact.add_contact_in_group_by_id(contact.id, group.name)
+            app.contact.add_contact_in_group_by_id(contact.id, group.id)
             old_contacts_in_group = db.get_contacts_in_group(Group(id=group.id))
         else:
             contact = random.choice(old_contacts_in_group)
         # удаляем выбранный контакт из группы
-        app.contact.del_contact_in_group_by_id(contact.id, group.name)
+        app.contact.del_contact_in_group_by_id(contact.id, group.id)
         # получаем список контактов входящих в данную группу, после удаления контакта
         new_contacts_in_group = db.get_contacts_in_group(Group(id=group.id))
         # Проверка
