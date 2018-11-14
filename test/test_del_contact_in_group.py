@@ -5,7 +5,7 @@ from fixture.orm import ORMFixture
 from model.group import Group
 
 
-def test_add_some_contact_in_group(app, db, check_ui):
+def test_del_some_contact_in_group(app, db, check_ui):
     db = ORMFixture(host="127.0.0.1", name="addressbook", user="root", password="")
     try:
         if len(db.get_contact_list()) == 0:
@@ -16,19 +16,23 @@ def test_add_some_contact_in_group(app, db, check_ui):
         group = random.choice(groups_list)
         # получаем из БД список контактов входящих в данную группу
         old_contacts_in_group = db.get_contacts_in_group(Group(id=group.id))
-        # получаем из БД список контактов не входящих в данную группу
-        contacts_not_in_group = db.get_contacts_not_in_group(Group(id=group.id))
-        if len(contacts_not_in_group) == 0:
-            contact = app.contact.create(Contact(firstname="abcd"))
-        else:
+        # Если список контактов входящих в группу пустой
+        if len(old_contacts_in_group) == 0:
+            # получаем из БД список контактов не входящих в данную группу
+            contacts_not_in_group = db.get_contacts_not_in_group(Group(id=group.id))
             contact = random.choice(contacts_not_in_group)
-        # добавляем выбранный контакт в выбранную группу
-        app.contact.add_contact_in_group_by_id(contact.id, group.name)
-        # получаем список контактов входящих в данную группу, после добавления контакта
+            # добавляем выбранный контакт в выбранную группу
+            app.contact.add_contact_in_group_by_id(contact.id, group.name)
+            old_contacts_in_group = db.get_contacts_in_group(Group(id=group.id))
+        else:
+            contact = random.choice(old_contacts_in_group)
+        # удаляем выбранный контакт из группы
+        app.contact.del_contact_in_group_by_id(contact.id, group.name)
+        # получаем список контактов входящих в данную группу, после удаления контакта
         new_contacts_in_group = db.get_contacts_in_group(Group(id=group.id))
         # Проверка
-        # К старому списку контактов, входящих в группу, присоединяем новый добавленный контакт
-        old_contacts_in_group.append(contact)
+        # В старом списке контактов, входящих в группу, удаляем выбранный контакт
+        old_contacts_in_group.remove(contact)
         # Проверяем старый список с новым
         assert sorted(old_contacts_in_group, key=Contact.id_or_max) == sorted(new_contacts_in_group, key=Contact.id_or_max)
         if check_ui:

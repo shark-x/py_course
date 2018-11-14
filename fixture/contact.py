@@ -216,11 +216,28 @@ class ContactHelper:
     def add_contact_in_group_by_id(self, id_contact, group_name):
         wd = self.app.wd
         self.open_home_page()
-        contact_by_id = self.selected_contact_by_id(id_contact)
-        contact_by_id.click()
-        wd.find_element_by_name("to_group").click()
-        Select(wd.find_element_by_name("to_group")).select_by_visible_text(group_name)
-        wd.find_element_by_name("to_group").click()
+        self.selected_contact_by_id(id_contact).click()
+        self.select_group_for_add_contact(group_name)
         wd.find_element_by_xpath("//input[@value='Add to']").click()
         self.open_home_page()
         # self.contact_cache = None
+
+    def select_group_for_add_contact(self, group_name):
+        wd = self.app.wd
+        wd.find_element_by_name("to_group").click()
+        Select(wd.find_element_by_name("to_group")).select_by_visible_text(group_name)
+        wd.find_element_by_name("to_group").click()
+
+    def del_contact_in_group_by_id(self, id_contact, group_name):
+        wd = self.app.wd
+        self.open_home_page()
+        self.show_contacts_in_group(group_name)
+        self.selected_contact_by_id(id_contact).click()
+        wd.find_element_by_name("remove").click()
+        self.open_home_page()
+
+    def show_contacts_in_group(self, group_name):
+        wd = self.app.wd
+        wd.find_element_by_name("group").click()
+        Select(wd.find_element_by_name("group")).select_by_visible_text(group_name)
+        wd.find_element_by_name("to_group").click()
