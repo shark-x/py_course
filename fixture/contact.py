@@ -166,6 +166,42 @@ class ContactHelper:
                        email=email, email2=email2, email3=email3,
                        thome=thome, twork=twork, tmobile=tmobile, sechome=sechome, address=address)
 
+    def get_contact_info_from_edit_page_by_id(self, id_contact):
+        wd = self.app.wd
+        self.open_contact_to_edit_by_id(id_contact)
+        lastname = wd.find_element_by_name("lastname").get_attribute("value")
+        firstname = wd.find_element_by_name("firstname").get_attribute("value")
+        id = id_contact #wd.find_element_by_name("home").get_attribute("value")
+        email = wd.find_element_by_name("email").get_attribute("value")
+        email2 = wd.find_element_by_name("email2").get_attribute("value")
+        email3 = wd.find_element_by_name("email3").get_attribute("value")
+        thome = wd.find_element_by_name("home").get_attribute("value")
+        twork = wd.find_element_by_name("work").get_attribute("value")
+        tmobile = wd.find_element_by_name("mobile").get_attribute("value")
+        sechome = wd.find_element_by_name("phone2").get_attribute("value")
+        address = wd.find_element_by_name("address").get_attribute("value")
+        return Contact(lastname=lastname, firstname=firstname, id=id,
+                       email=email, email2=email2, email3=email3,
+                       thome=thome, twork=twork, tmobile=tmobile, sechome=sechome, address=address)
+
+    def open_contact_to_edit_by_id(self, id):
+        wd = self.app.wd
+        self.open_home_page()
+        contact_by_id = self.find_contact_by_id(id)
+        edit_button = contact_by_id.find_elements_by_tag_name("td")[7]
+        edit_button.find_element_by_tag_name("a").click()
+        # row = wd.find_elements_by_xpath("//input[@id='%s']" % id)
+        # cell = row.find_elements_by_tag_name("td")[7]
+        # cell.find_element_by_tag_name("a").click()
+
+    def find_contact_by_id(self, id):
+        wd = self.app.wd
+        contacts_list = wd.find_elements_by_xpath("//tr[@name='entry']")
+        for contact in contacts_list:
+            id_contact = contact.find_element_by_name("selected[]").get_attribute("id")
+            if id_contact == id:
+                return contact
+
     def get_contact_from_view_page(self, index):
         wd = self.app.wd
         self.open_contact_view_by_index(index)
