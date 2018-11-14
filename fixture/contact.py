@@ -1,5 +1,6 @@
 from model.contact import Contact
 import re
+from selenium.webdriver.support.ui import Select
 
 
 class ContactHelper:
@@ -211,3 +212,15 @@ class ContactHelper:
         tmobile = re.search("M: (.*)", text).group(1)
         sechome = re.search("P: (.*)", text).group(1)
         return Contact(thome=thome, twork=twork, tmobile=tmobile, sechome=sechome)
+
+    def add_contact_in_group_by_id(self, id_contact, group_name):
+        wd = self.app.wd
+        self.open_home_page()
+        contact_by_id = self.selected_contact_by_id(id_contact)
+        contact_by_id.click()
+        wd.find_element_by_name("to_group").click()
+        Select(wd.find_element_by_name("to_group")).select_by_visible_text(group_name)
+        wd.find_element_by_name("to_group").click()
+        wd.find_element_by_xpath("//input[@value='Add to']").click()
+        self.open_home_page()
+        # self.contact_cache = None

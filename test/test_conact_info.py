@@ -36,8 +36,6 @@ def test_contact_info_on_edit_page(app, db):
         assert contact_info_on_hp.tmobile == is_none(contact_info_on_ep.tmobile)
         assert contact_info_on_hp.twork == is_none(contact_info_on_ep.twork)
         assert contact_info_on_hp.sechome == is_none(contact_info_on_ep.sechome)
-        # assert contact_info_on_hp.all_emails_from_home_page == merge_emails_like_on_home_page(contact_info_on_ep)
-        # assert contact_info_on_hp.all_phones_from_home_page == merge_phones_like_on_home_page(contact_info_on_ep)
 
 
 #Сравнение информации о контактах/ Сравнивается информация с главной страницы с информацией загруженной из БД
