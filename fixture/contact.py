@@ -211,5 +211,3 @@ class ContactHelper:
         tmobile = re.search("M: (.*)", text).group(1)
         sechome = re.search("P: (.*)", text).group(1)
         return Contact(thome=thome, twork=twork, tmobile=tmobile, sechome=sechome)
-
-
