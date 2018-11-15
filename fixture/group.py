@@ -62,6 +62,25 @@ class GroupHelper:
         self.return_to_group_page()
         self.group_cache = None
 
+    def edit_group_by_id(self, new_group_data, id_group):
+        wd = self.app.wd
+        self.open_group_page()
+        index = self.get_group_index(id_group)
+        self.selected_group_by_index(index)
+        wd.find_element_by_name("edit").click()
+        self.fill_form_group(new_group_data)
+        wd.find_element_by_name("update").click()
+        self.return_to_group_page()
+        self.group_cache = None
+
+    def get_group_index(self,id_group):
+        wd = self.app.wd
+        group_list = wd.find_elements_by_xpath("//span[@class='group']")
+        for group in group_list:
+            id = group.find_element_by_name("selected[]").get_attribute("value")
+            if id == id_group:
+                return group_list.index(group)
+
     def edit_first_group(self, new_group_data):
         self.edit_group_by_index(new_group_data, 0)
 

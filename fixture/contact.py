@@ -1,6 +1,7 @@
 from model.contact import Contact
 import re
 from selenium.webdriver.support.ui import Select
+from operator import index
 
 
 class ContactHelper:
@@ -36,7 +37,29 @@ class ContactHelper:
 
     def selected_contact_by_index(self, index):
         wd = self.app.wd
-        return wd.find_elements_by_xpath("//tr[@name='entry']")[index]
+        contact_list = list(wd.find_elements_by_xpath("//tr[@name='entry']"))
+        return contact_list[index]
+
+    def edit_contact_by_id(self, new_contact_data, id_contact):
+        wd = self.app.wd
+        self.open_home_page()
+        index = self.get_contact_index(id_contact)
+        contact = self.selected_contact_by_index(index)
+        contact.find_element_by_xpath("td[8]").click()
+        self.fill_form_contact(new_contact_data)
+        # Submit contact creation
+        wd.find_element_by_name("update").click()
+        self.open_home_page()
+        self.contact_cache = None
+
+    def get_contact_index(self, id_contact):
+        wd = self.app.wd
+        contact_list = wd.find_elements_by_xpath("//tr[@name='entry']")
+        for contact in contact_list:
+            id = contact.find_element_by_name("selected[]").get_attribute("value")
+            if id == id_contact:
+                return contact_list.index(contact)
+
 
     def selected_contact_by_id(self, id):
         wd = self.app.wd
