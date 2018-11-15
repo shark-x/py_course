@@ -10,6 +10,8 @@ def test_add_some_contact_in_group(app, db, check_ui):
     try:
         if len(db.get_contact_list()) == 0:
             app.contact.create(Contact(firstname="abcd"))
+        if len(db.get_group_list()) == 0:
+            app.group.create(Group(name='group', header='header_group', footer='footer_group'))
         # берем список групп из БД
         groups_list = db.get_group_list()
         # выбираем некоторую группу из списка
