@@ -1,5 +1,6 @@
 from model.contact import Contact
 from random import randrange
+import time
 
 
 def test_edit_some_contact(app, db, check_ui):
@@ -10,6 +11,7 @@ def test_edit_some_contact(app, db, check_ui):
     index = randrange(len(old_contact_list))
     contact.id = old_contact_list[index].id
     app.contact.edit_contact_by_index(contact, index)
+    time.sleep(1)
     assert len(old_contact_list) == len(db.get_contact_list())
     new_contact_list = db.get_contact_list()
     old_contact_list[index] = contact
