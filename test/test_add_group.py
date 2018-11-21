@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 from model.group import Group
-# import pytest
-# from data.groups import constant as test_data
 
 
-# @pytest.mark.parametrize("group", test_data, ids=[repr(x) for x in test_data])
 def test_add_group(app, db, json_groups, check_ui):
     group = json_groups
     old_groups = db.get_group_list()

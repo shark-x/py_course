@@ -6,8 +6,6 @@ from model.group import Group
 
 
 def test_del_some_contact_in_group(app, db, orm, check_ui):
-    # db = ORMFixture(host="127.0.0.1", name="addressbook", user="root", password="")
-    #try:
     if len(db.get_contact_list()) == 0:
         app.contact.create(Contact(firstname="abcd"))
     if len(db.get_group_list()) == 0:
@@ -40,5 +38,3 @@ def test_del_some_contact_in_group(app, db, orm, check_ui):
     if check_ui:
         # Проверяем новый список контактов входящих в группу, полученный из БД, со списокм, полученным из UI
         assert sorted(new_contacts_in_group, key=Contact.id_or_max) == sorted(app.contact.get_contact_list(), key=Contact.id_or_max)
-    # finally:
-    #     pass
