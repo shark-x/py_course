@@ -1,0 +1,54 @@
+<ns0:test-suite xmlns:ns0="urn:model.allure.qatools.yandex.ru" start="1543214603874" stop="1543214656106">
+  <name>test.test_add_contact</name>
+  <labels/>
+  <test-cases>
+    <test-case start="1543214603874" status="passed" stop="1543214607051">
+      <name>test_add_contact[,,None]</name>
+      <attachments/>
+      <labels>
+        <label name="severity" value="normal"/>
+        <label name="thread" value="5756-MainThread"/>
+        <label name="host" value="GeosPC-17"/>
+        <label name="framework" value="pytest"/>
+        <label name="language" value="cpython3"/>
+      </labels>
+      <steps/>
+    </test-case>
+    <test-case start="1543214607052" status="passed" stop="1543214611522">
+      <name>test_add_contact[firstname,lastnameLDuiT2jbIMFCE6,None]</name>
+      <attachments/>
+      <labels>
+        <label name="severity" value="normal"/>
+        <label name="thread" value="5756-MainThread"/>
+        <label name="host" value="GeosPC-17"/>
+        <label name="framework" value="pytest"/>
+        <label name="language" value="cpython3"/>
+      </labels>
+      <steps/>
+    </test-case>
+    <test-case start="1543214611524" status="passed" stop="1543214652530">
+      <name>test_add_contact[firstname7yd,lastnamej,None]</name>
+      <attachments/>
+      <labels>
+        <label name="severity" value="normal"/>
+        <label name="thread" value="5756-MainThread"/>
+        <label name="host" value="GeosPC-17"/>
+        <label name="framework" value="pytest"/>
+        <label name="language" value="cpython3"/>
+      </labels>
+      <steps/>
+    </test-case>
+    <test-case start="1543214652531" status="passed" stop="1543214656106">
+      <name>test_add_contact[firstnameI,lastnameIjS,None]</name>
+      <attachments/>
+      <labels>
+        <label name="severity" value="normal"/>
+        <label name="thread" value="5756-MainThread"/>
+        <label name="host" value="GeosPC-17"/>
+        <label name="framework" value="pytest"/>
+        <label name="language" value="cpython3"/>
+      </labels>
+      <steps/>
+    </test-case>
+  </test-cases>
+</ns0:test-suite>

@@ -1,0 +1,62 @@
+GET CONNECTION FROM THE LOCAL POOL
+SELECT `g`.`group_id`, `g`.`group_name`, `g`.`group_header`, `g`.`group_footer`
+FROM `group_list` `g`
+WHERE `g`.`group_id` = %s
+['543']
+
+SELECT `T1`.`id`
+FROM `address_in_groups` `T1`
+WHERE `T1`.`group_id` = %s
+[543]
+
+COMMIT
+RELEASE CONNECTION
+GET CONNECTION FROM THE LOCAL POOL
+SELECT `g`.`group_id`, `g`.`group_name`, `g`.`group_header`, `g`.`group_footer`
+FROM `group_list` `g`
+WHERE `g`.`group_id` = %s
+['543']
+
+SELECT `c`.`id`, `c`.`firstname`, `c`.`lastname`, `c`.`deprecated`
+FROM `addressbook` `c`
+WHERE `c`.`deprecated` IS NULL
+  AND %s NOT IN (
+    SELECT `t-1`.`group_id`
+    FROM `address_in_groups` `t-1`
+    WHERE `c`.`id` = `t-1`.`id`
+    )
+[543]
+
+COMMIT
+RELEASE CONNECTION
+GET CONNECTION FROM THE LOCAL POOL
+SELECT `g`.`group_id`, `g`.`group_name`, `g`.`group_header`, `g`.`group_footer`
+FROM `group_list` `g`
+WHERE `g`.`group_id` = %s
+['543']
+
+SELECT `T1`.`id`
+FROM `address_in_groups` `T1`
+WHERE `T1`.`group_id` = %s
+[543]
+
+SELECT `id`, `firstname`, `lastname`, `deprecated`
+FROM `addressbook`
+WHERE `id` = %s
+[538]
+
+COMMIT
+RELEASE CONNECTION
+GET CONNECTION FROM THE LOCAL POOL
+SELECT `g`.`group_id`, `g`.`group_name`, `g`.`group_header`, `g`.`group_footer`
+FROM `group_list` `g`
+WHERE `g`.`group_id` = %s
+['543']
+
+SELECT `T1`.`id`
+FROM `address_in_groups` `T1`
+WHERE `T1`.`group_id` = %s
+[543]
+
+COMMIT
+RELEASE CONNECTION
